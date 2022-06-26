@@ -1,7 +1,7 @@
 from stack import Stack
 
 linebreak = "---------------------"
-print("\nLet's play Towers of Hanoi!!")
+print("\nLet's play Towers of Hanoi!!\n" + linebreak*2)
 
 #Create the Stacks
 stacks =[]
@@ -14,7 +14,7 @@ stacks.append(middle_stack)
 stacks.append(right_stack)
 
 #Set up the Game
-num_disks = int(input("\nHow many disks do you want to play with?\n"))
+num_disks = int(input("\nHow many disks do you want to play with?\n" + linebreak*2 + "\n"))
 
 while num_disks < 3:
   num_disks = int(input("\nEnter a number greater than or equal to 3\n"))
@@ -28,7 +28,7 @@ for i in range(num_disks,0,-1):
 #print(right_stack.print_items())
 
 num_optimal_moves = (2**num_disks)-1
-print("\nThe fastest you can solve this game is in {num} moves".format(num=num_optimal_moves))
+print("\nThe fastest you can solve this game is in {num} moves\n".format(num=num_optimal_moves) + linebreak*2)
 
 #Get User Input
 def get_input():
@@ -63,20 +63,21 @@ while right_stack.get_size() != num_disks:
   # This is where we allow the user to move the rings on the stacks.
   while True:
     # The user can now define the move.
-    print("\nWhich stack do you want to move from?\n")
+    print("\nWhich stack do you want to move from?\n" + linebreak*2)
     from_stack = get_input()
-    print("\nWhich stack do you want to move to?\n")
-    to_stack = get_input()
-
     if from_stack.get_size() == 0:
-      print(linebreak + "\n\nNo discs on the current chosen stack!" + linebreak)
-    elif to_stack.get_size() == 0 or from_stack.peek() < to_stack.peek():
+      print(linebreak + "\nThe chosen stack has no available rings!\n" + linebreak)
+      break
+    print("\nWhich stack do you want to move to?\n" + linebreak*2)
+    to_stack = get_input()
+    # The if statement below tests if the move is valid, first by checking if there are discs to move!
+    if to_stack.get_size() == 0 or from_stack.peek() < to_stack.peek():
       disk = from_stack.pop()
       to_stack.push(disk)
       num_user_moves += 1
       break
     else:
-      print(linebreak + "\n\nThe disc on the current stack is smaller" + linebreak)
+      print(linebreak + "\nThe disc on the current stack is smaller\n" + linebreak)
 
 
-print("\n\nYou completed the game in {num} moves, and the optimal number of moves is {optimal}".format(num=num_user_moves, optimal=num_optimal_moves))
+print(linebreak*4 + "\nYou completed the game in {num} moves, and the optimal number of moves is {optimal}\n".format(num=num_user_moves, optimal=num_optimal_moves) + linebreak*4)
